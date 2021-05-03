@@ -1,4 +1,4 @@
-import { createStore, combineReducers } from 'redux';
+import { createStore, combineReducers, bindActionCreators } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 
 import './App.css';
@@ -56,6 +56,34 @@ const allReducers = combineReducers({movies, actors});
 const store = createStore(allReducers, composeWithDevTools());
 
 window.store = store;
+
+const addMovie = movie => ({
+  type: 'ADD_MOVIES',
+  movie
+})
+
+const resetMovies = () => ({
+  type: 'RESET_MOVIES',
+})
+
+const movieActions = bindActionCreators({add : addMovie, reset: resetMovies}, store.dispatch);
+
+movieActions.add('Szybcy i Wsciekli');
+//movieActions.reset();
+
+const addActor = person => ({
+  type: 'ADD_ACTORS',
+  person
+})
+
+const resetActors = () => ({
+  type: 'RESET_ACTORS',
+})
+
+const actorsActions = bindActionCreators({ add: addActor, reset: resetActors}, store.dispatch);
+actorsActions.add('Pitt');
+// actorsActions.reset();
+
 
 // store.getState()
 // store.dispatch({type: "RESET"})
