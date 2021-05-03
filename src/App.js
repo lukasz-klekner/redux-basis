@@ -1,25 +1,33 @@
-import { createStore } from 'redux';
+import { createStore, combineReducers } from 'redux';
+import { composeWithDevTools } from 'redux-devtools-extension';
 
 import './App.css';
 
 
 const initialMovies = {
   listName : 'favourite',
-  movies: [
+  list: [
     'Titcanic', 'Dijango', 'Rambo'
+  ]
+}
+
+const initialActors = {
+  listName : 'best',
+  list: [
+    'DiCaprio', 'De Niro', 'Hopkins', 'Al Pacino', 'Hanks'
   ]
 }
 
 function movies(state = initialMovies, action) {
   switch(action.type){
-    case 'RESET':
+    case 'RESET_MOVIES':
       return {
-        ...state, movies: [],
+        ...state, list: [],
       }
 
-    case 'ADD':
+    case 'ADD_MOVIES':
       return {
-        ...state, movies: [...state.movies, action.movie]
+        ...state, list: [...state.list, action.movie]
       }
 
     default:
@@ -27,7 +35,25 @@ function movies(state = initialMovies, action) {
   }
 }
 
-const store = createStore(movies);
+function actors(state=initialActors, action){
+  switch(action.type){
+    case 'RESET_ACTORS':
+      return {
+        ...state, list: []
+      }
+    case 'ADD_ACTORS':
+      return {
+        ...state, list: [...state.list, action.person]
+      }
+
+    default:
+      return state;
+  }
+}
+
+const allReducers = combineReducers({movies, actors});
+
+const store = createStore(allReducers, composeWithDevTools());
 
 window.store = store;
 
