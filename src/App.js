@@ -1,6 +1,7 @@
 import MoviesContainer from './app/movies/components/MoviesContainer';
 import ActorsContainer from './app/actors/components/ActorsContainer';
 import MoviesForm from './app/movies/components/MoviesForm';
+import ActorsForm from './app/actors/components/ActorsForm';
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
 
       <h2>Aktorzy:</h2>
       <ActorsContainer />
+      <ActorsForm />
     </div>
   );
 }
