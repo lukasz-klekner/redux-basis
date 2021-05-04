@@ -1,14 +1,15 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import  actions  from '../duck/actions'
 
-const ActorsForm = ({ add }) => {
+const ActorsForm = () => {
 
+    const dispatch = useDispatch();
     const actorInput = React.createRef();
 
     const addActor = e => {
         e.preventDefault();
-        add(actorInput.current.value);
+        dispatch(actions.add(actorInput.current.value));
         actorInput.current.value = '';
 
     }
@@ -21,8 +22,4 @@ const ActorsForm = ({ add }) => {
     )
 }
 
-    const mapDispatchToProps = dispatch => ({
-        add: actor => dispatch(actions.add(actor))
-    })
-
-    export default connect(null, mapDispatchToProps)(ActorsForm);
+export default ActorsForm;
