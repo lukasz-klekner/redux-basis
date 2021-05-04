@@ -1,13 +1,14 @@
-import { connect } from 'react-redux'
+import { useSelector } from 'react-redux'
 
-const MoviesContainer = ({movies}) =>  (
+const MoviesContainer = (props) =>  {
+
+    const movies = useSelector(state => state.movies);
+
+    return (
     <ul>
         {movies.list.map((movie, index) => <li key={index}>{movie}</li>)}
     </ul>
-);
+    )
+}
 
-const mapStateToProps = state => ({
-    movies: state.movies
-})
-
-export default connect(mapStateToProps, {})(MoviesContainer);
+export default MoviesContainer;
